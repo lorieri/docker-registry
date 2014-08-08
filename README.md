@@ -393,7 +393,7 @@ is already taken, find out which container is already using it by running `docke
 ### Advanced: install the registry on an existing server
 
 #### On Docker and Ceph Rados Gateway
-
+```
 docker run \
          -e SETTINGS_FLAVOR=s3 \
          -e AWS_BUCKET=acme-docker \
@@ -408,7 +408,7 @@ docker run \
          -p 5000:5000 \
          lorieri/registry-ceph:0.0.1 \
          docker-registry
-
+```
 
 #### On Ubuntu
 

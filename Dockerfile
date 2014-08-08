@@ -1,3 +1,10 @@
+# usage:
+#	$ git clone https://github.com/lorieri/docker-registry.git
+#	$ cd docker-registry
+#	$ sudo docker build -rm -t lorieri/registry-ceph .
+#
+# ripped from :
+#
 # VERSION 0.1
 # DOCKER-VERSION  0.7.3
 # AUTHOR:         Sam Alba <sam@docker.com>
@@ -20,6 +27,7 @@ run apt-get -y install python-dev liblzma-dev libevent1-dev
 
 add . /docker-registry
 add ./config/boto.cfg /etc/boto.cfg
+add ./docker_registry/drivers/s3.py /usr/local/lib/python2.7/dist-packages/docker_registry/drivers/s3.py
 
 # Install core
 run pip install /docker-registry/depends/docker-registry-core

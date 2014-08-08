@@ -72,6 +72,14 @@ class Storage(coreboto.Base):
 
     def makeConnection(self):
         kwargs = self._build_connection_params()
+        if self._config.s3_region == "ceph":
+            return boto.connect_s3(
+                aws_access_key_id=self._config.s3_access_key,
+                aws_secret_access_key=self._config.s3_secret_key,
+                host=self._config.s3_host,
+                calling_format = boto.s3.connection.OrdinaryCallingFormat(),
+                **kwargs)
+
         # Connect cloudfront if we are required to
         if self._config.cloudfront:
             self.signer = Cloudfront(

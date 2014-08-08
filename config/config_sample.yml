@@ -64,10 +64,11 @@ s3: &s3
     s3_bucket: _env:AWS_BUCKET
     boto_bucket: _env:AWS_BUCKET
     storage_path: _env:STORAGE_PATH:/registry
-    s3_encrypt: _env:AWS_ENCRYPT:true
-    s3_secure: _env:AWS_SECURE:true
+    s3_encrypt: _env:AWS_ENCRYPT:false
+    s3_secure: _env:AWS_SECURE:false
     s3_access_key: _env:AWS_KEY
     s3_secret_key: _env:AWS_SECRET
+    s3_host: _env:AWS_HOST
 
 # Google Cloud Storage Configuration
 # See:

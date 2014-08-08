@@ -392,6 +392,24 @@ is already taken, find out which container is already using it by running `docke
 
 ### Advanced: install the registry on an existing server
 
+#### On Docker and Ceph Rados Gateway
+
+docker run \
+         -e SETTINGS_FLAVOR=s3 \
+         -e AWS_BUCKET=acme-docker \
+         -e STORAGE_PATH=/registry \
+         -e AWS_KEY=AKIAHSHB43HS3J92MXZ \
+         -e AWS_SECRET=xdDowwlK7TJajV1Y7EoOZrmuPEJlHYcNP2k4j49T \
+         -e SEARCH_BACKEND=sqlalchemy \
+         -e AWS_REGION=ceph \
+         -e AWS_HOST=myradosgw.com \
+         -e AWS_SECURE=false \
+         -e AWS_ENCRYPT=false \
+         -p 5000:5000 \
+         lorieri/registry-ceph:0.0.1 \
+         docker-registry
+
+
 #### On Ubuntu
 
 Install the system requirements for building a Python library:

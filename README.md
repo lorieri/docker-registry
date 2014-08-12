@@ -1,3 +1,27 @@
+About this Fork
+===============
+
+This is a fork from https://github.com/docker/docker-registry
+
+The changes are AWS_REGION=ceph and AWS_HOST=your_ceph_radosgw.com
+
+```
+docker run \
+         -e SETTINGS_FLAVOR=s3 \
+         -e AWS_BUCKET=acme-docker \
+         -e STORAGE_PATH=/registry \
+         -e AWS_KEY=AKIAHSHB43HS3J92MXZ \
+         -e AWS_SECRET=xdDowwlK7TJajV1Y7EoOZrmuPEJlHYcNP2k4j49T \
+         -e SEARCH_BACKEND=sqlalchemy \
+         -e AWS_REGION=ceph \
+         -e AWS_HOST=myradosgw.com \
+         -e AWS_SECURE=false \
+         -e AWS_ENCRYPT=false \
+         -p 5000:5000 \
+         lorieri/registry-ceph-automated
+```
+
+
 Docker-Registry
 ===============
 

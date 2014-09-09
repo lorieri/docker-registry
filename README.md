@@ -352,11 +352,11 @@ AWS Simple Storage Service options
       server-side by S3 and will be stored in an encrypted form while at rest
       in S3.
 1. `s3_secure`: boolean, true for HTTPS to S3
-1. `boto_bucket`: string, the bucket name
-1. `boto_host`: string, host of non-amazon backend
-1. `boto_port`: for non-amazon backend
-1. `boto_debug`: for debug
-1. `boto_calling_format`: for non-amazon-backend
+1. `boto_bucket`: string, the bucket name for *non*-Amazon S3-compliant object store
+1. `boto_host`: string, host for *non*-Amazon S3-compliant object store
+1. `boto_port`: for *non*-Amazon S3-compliant object store
+1. `boto_debug`: for *non*-Amazon S3-compliant object store
+1. `boto_calling_format`: for *non*-Amazon S3-compliant object store
 1. `storage_path`: string, the sub "folder" where image data will be stored.
 
 Example:
@@ -370,11 +370,10 @@ prod:
   s3_secret_key: xdDowwlK7TJajV1Y7EoOZrmuPEJlHYcNP2k4j49T
 ```
 
-Example for S3 compatible APIs (e.g. Ceph and Riak CS):
+Example *non*-Amazon S3-compliant object store (e.g. Ceph and Riak CS):
 ```yaml
 prod:
   storage: s3
-  s3_host: s3compatible.com
   s3_bucket: acme-docker
   s3_secure: false
   s3_encrypt: false
@@ -413,7 +412,7 @@ docker run \
 NOTE: The container will try to allocate the port 5000. If the port
 is already taken, find out which container is already using it by running `docker ps`
 
-### Other S3 backends (e.g. Ceph and Riak CS)
+### Other *non*-Amazon S3-compliant object store (e.g. Ceph and Riak CS)
 
 docker run \
          -e SETTINGS_FLAVOR=s3 \

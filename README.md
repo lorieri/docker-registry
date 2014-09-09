@@ -414,6 +414,7 @@ is already taken, find out which container is already using it by running `docke
 
 ### Other *non*-Amazon S3-compliant object store (e.g. Ceph and Riak CS)
 
+```
 docker run \
          -e SETTINGS_FLAVOR=s3 \
          -e AWS_BUCKET=acme-docker \
@@ -429,6 +430,7 @@ docker run \
          -p AWS_DEBUG=true \
          -p AWS_CALLING_FORMAT=OrdinaryCallingFormat \
          registry
+```
 
 ### Advanced: install the registry on an existing server
 

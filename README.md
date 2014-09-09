@@ -347,13 +347,16 @@ AWS Simple Storage Service options
 1. `s3_access_key`: string, S3 access key
 1. `s3_secret_key`: string, S3 secret key
 1. `s3_bucket`: string, S3 bucket name
-1. `s3_region`: S3 region where the bucket is located or 'generic' for other S3 compatible APIs
-1. `s3_host`: string, only used when s3_region is set as 'generic'
+1. `s3_region`: S3 region where the bucket is located
 1. `s3_encrypt`: boolean, if true, the container will be encrypted on the
       server-side by S3 and will be stored in an encrypted form while at rest
       in S3.
 1. `s3_secure`: boolean, true for HTTPS to S3
 1. `boto_bucket`: string, the bucket name
+1. `boto_host`: string, host of non-amazon backend
+1. `boto_port`: for non-amazon backend
+1. `boto_debug`: for debug
+1. `boto_calling_format`: for non-amazon-backend
 1. `storage_path`: string, the sub "folder" where image data will be stored.
 
 Example:
@@ -367,11 +370,10 @@ prod:
   s3_secret_key: xdDowwlK7TJajV1Y7EoOZrmuPEJlHYcNP2k4j49T
 ```
 
-Example for S3 compatible APIs (e.g. Ceph):
+Example for S3 compatible APIs (e.g. Ceph and Riak CS):
 ```yaml
 prod:
   storage: s3
-  s3_region: generic
   s3_host: s3compatible.com
   s3_bucket: acme-docker
   s3_secure: false
@@ -379,6 +381,11 @@ prod:
   storage_path: /registry
   s3_access_key: AKIAHSHB43HS3J92MXZ
   s3_secret_key: xdDowwlK7TJajV1Y7EoOZrmuPEJlHYcNP2k4j49T
+  boto_host: myowns3.com
+  boto_port: 80
+  boto_debug: true
+  boto_calling_format: OrdinaryCallingFormat
+
 ```
 
 Run the Registry
@@ -405,6 +412,24 @@ docker run \
 
 NOTE: The container will try to allocate the port 5000. If the port
 is already taken, find out which container is already using it by running `docker ps`
+
+### Other S3 backends (e.g. Ceph and Riak CS)
+
+docker run \
+         -e SETTINGS_FLAVOR=s3 \
+         -e AWS_BUCKET=acme-docker \
+         -e STORAGE_PATH=/registry \
+         -e AWS_KEY=AKIAHSHB43HS3J92MXZ \
+         -e AWS_SECRET=xdDowwlK7TJajV1Y7EoOZrmuPEJlHYcNP2k4j49T \
+         -e SEARCH_BACKEND=sqlalchemy \
+         -p 5000:5000 \
+         -p AWS_HOST=myowns3.com \
+         -p AWS_SECURE=false \
+         -p AWS_ENCRYPT=false \
+         -p AWS_PORT=80 \
+         -p AWS_DEBUG=true \
+         -p AWS_CALLING_FORMAT=OrdinaryCallingFormat \
+         registry
 
 ### Advanced: install the registry on an existing server
 

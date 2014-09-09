@@ -347,7 +347,8 @@ AWS Simple Storage Service options
 1. `s3_access_key`: string, S3 access key
 1. `s3_secret_key`: string, S3 secret key
 1. `s3_bucket`: string, S3 bucket name
-1. `s3_region`: S3 region where the bucket is located
+1. `s3_region`: S3 region where the bucket is located or 'generic' for other S3 compatible APIs
+1. `s3_host`: string, only used when s3_region is set as 'generic'
 1. `s3_encrypt`: boolean, if true, the container will be encrypted on the
       server-side by S3 and will be stored in an encrypted form while at rest
       in S3.
@@ -361,6 +362,20 @@ prod:
   storage: s3
   s3_region: us-west-1
   s3_bucket: acme-docker
+  storage_path: /registry
+  s3_access_key: AKIAHSHB43HS3J92MXZ
+  s3_secret_key: xdDowwlK7TJajV1Y7EoOZrmuPEJlHYcNP2k4j49T
+```
+
+Example for S3 compatible APIs (e.g. Ceph):
+```yaml
+prod:
+  storage: s3
+  s3_region: generic
+  s3_host: s3compatible.com
+  s3_bucket: acme-docker
+  s3_secure: false
+  s3_encrypt: false
   storage_path: /registry
   s3_access_key: AKIAHSHB43HS3J92MXZ
   s3_secret_key: xdDowwlK7TJajV1Y7EoOZrmuPEJlHYcNP2k4j49T
